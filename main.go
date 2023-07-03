@@ -13,5 +13,5 @@ func main() {
 
 	insertDB("sayko", "memo", db)
 
-	advancedMiddleware()
+	passwd()
 }
