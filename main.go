@@ -1,7 +1,7 @@
 package main
 
 func main() {
-    const (
+	const (
 		host     = "localhost"
 		port     = 5433
 		user     = "mehmet"
@@ -9,7 +9,9 @@ func main() {
 		dbname   = "mehmet"
 	)
 
-    db := connectDB(host, port, user, password, dbname)
+	db := connectDB(host, port, user, password, dbname)
 
-    insertDB("sayko", "memo", db)
+	insertDB("sayko", "memo", db)
+
+	advancedMiddleware()
 }
