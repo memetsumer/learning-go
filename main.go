@@ -1,17 +1,17 @@
 package main
 
 func main() {
-	const (
-		host     = "localhost"
-		port     = 5433
-		user     = "mehmet"
-		password = "mehmet"
-		dbname   = "mehmet"
-	)
+	// const (
+	// 	host     = "localhost"
+	// 	port     = 5433
+	// 	user     = "mehmet"
+	// 	password = "mehmet"
+	// 	dbname   = "mehmet"
+	// )
 
-	db := connectDB(host, port, user, password, dbname)
+	// db := connectDB(host, port, user, password, dbname)
 
-	insertDB("sayko", "memo", db)
+	// insertDB("sayko", "memo", db)
 
-	passwd()
+	run()
 }
