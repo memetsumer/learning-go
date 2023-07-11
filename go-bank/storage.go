@@ -41,14 +41,15 @@ func NewPostgresStore() (*PostgresStore, error) {
 
 func (s *PostgresStore) CreateAccount(acc *Account) error {
 	query := `INSERT INTO account
-	(first_name, last_name, number, balance, created_at)
+	(first_name, last_name, number, encrypted_password, balance, created_at)
 	VALUES 
-	($1, $2, $3, $4, $5)`
+	($1, $2, $3, $4, $5, $6)`
 
 	_, err := s.db.Query(query,
 		acc.FirstName,
 		acc.LastName,
 		acc.Number,
+		acc.EncryptedPassword,
 		acc.Balance,
 		acc.CreatedAt)
 
@@ -64,7 +65,7 @@ func (s *PostgresStore) UpdateAccount(*Account) error {
 }
 
 func (s *PostgresStore) DeleteAccount(id int) error {
-	_, err := s.db.Query(`DELETE FROM ACCOUNT WHERE id = $1`, id)
+	_, err := s.db.Query(`DELETE FROM account WHERE id = $1`, id)
 	return err
 }
 
@@ -116,9 +117,10 @@ func (s *PostgresStore) Init() error {
 func (s *PostgresStore) CreateAccountTable() error {
 	query := `CREATE TABLE IF NOT EXISTS account (
 		id serial primary key,
-		first_name varchar(50),
-		last_name varchar(50),
+		first_name varchar(100),
+		last_name varchar(100),
 		number serial,
+		encrypted_password varchar(100),
 		balance serial,
 		created_at timestamp  
 	)`
@@ -145,6 +147,7 @@ func scanIntoAccount(rows *sql.Rows) (*Account, error) {
 		&account.FirstName,
 		&account.LastName,
 		&account.Number,
+		&account.EncryptedPassword,
 		&account.Balance,
 		&account.CreatedAt,
 	)

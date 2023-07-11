@@ -25,8 +25,13 @@ func seedAccounts(s Storage) {
 	seedAccount(s, "a", "b", "hunter8888")
 }
 
+func dropTable(s Storage) {
+	s.DropAccountTable()
+}
+
 func main() {
 	seed := flag.Bool("seed", false, "seed the db")
+	drop := flag.Bool("drop", false, "drop the db")
 	flag.Parse()
 
 	store, err := NewPostgresStore()
@@ -42,6 +47,11 @@ func main() {
 	if *seed {
 		fmt.Println("seeding the database")
 		seedAccounts(store)
+	}
+
+	if *drop {
+		fmt.Println("dropping the database")
+		dropTable(store)
 	}
 
 	server := NewAPIServer(":3000", store)
