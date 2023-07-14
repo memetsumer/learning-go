@@ -13,5 +13,7 @@ func main() {
 
 	// insertDB("sayko", "memo", db)
 
-	run()
+	// run()
+
+	RunAndSetRedis()
 }
