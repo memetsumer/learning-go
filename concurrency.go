@@ -6,6 +6,11 @@ import (
 	"time"
 )
 
+type Person struct {
+	id int
+	name string 
+}
+
 func cn() {
 	now := time.Now()
 	userID := 10
